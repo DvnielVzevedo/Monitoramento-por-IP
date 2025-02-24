@@ -27,12 +27,12 @@ dispositivo = ""
 erro_apresentado = ""
 ip_monitorado = ""
 enviar_email = 0
-pasta_log = "" #Digite entre "" o caminho para a pasta onde deseja guardar o log
-
+pasta_log = "" #Digite entre "" o caminho o arquivo que vai guardar o log. EX: C:\\Nova pasta\\log.txt
+contato = ""#Digite entre "" os emails que deseja que recebam os alertas. EX: "email@email.com;email2@email.com"
 
 #DEFs
 def MandarEmail():
-    global dispositivo, erro_apresentado, ip_monitorado, enviar_email
+    global dispositivo, erro_apresentado, ip_monitorado, enviar_email, contato
     if enviar_email == 1:
         try:
             # Inicializa o COM para este thread
@@ -42,7 +42,7 @@ def MandarEmail():
             #criar um email
             email = outlook.CreateItem(0)
             #configurar as informações do seu e-mail
-            email.To = "" #Digite entre "" os emails que deseja que recebam os alertas
+            email.To = contato 
             email.Subject = "Erro com dispositivo monitorado"
             email.HTMLBody = f"""
             <p>Algo aconteceu com o dispositivo {dispositivo}, enquanto ele estava sendo monitorado via Ping</p>
